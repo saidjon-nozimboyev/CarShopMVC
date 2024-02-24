@@ -10,7 +10,6 @@
     <Folder Include="BusinessLogic\DTOs\BrandDTOs\" />
     <Folder Include="BusinessLogic\DTOs\CarDTOs\" />
     <Folder Include="BusinessLogic\DTOs\CategoryDTOs\" />
-    <Folder Include="Data\Repositories\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿namespace CarShop.Data.Interfaces;
 
-public interface IUnitOfWorks
+public interface IUnitOfWork
 {
     IBrandInterface Brands { get; }
     ICarInterface Cars { get; }

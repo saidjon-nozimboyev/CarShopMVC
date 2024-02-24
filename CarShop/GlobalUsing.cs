@@ -1,6 +1,2 @@
-﻿namespace CarShop
-{
-    public class GlobalUsing
-    {
-    }
-}
+﻿global using Microsoft.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Mvc;
