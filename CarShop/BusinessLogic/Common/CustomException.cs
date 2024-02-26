@@ -1,6 +1,7 @@
-﻿namespace CarShop.BusinessLogic.Common
+﻿namespace CarShop.BusinessLogic.Common;
+
+public class CustomException(string key, string message) 
+    : Exception(message)
 {
-    public class CustomException
-    {
-    }
+    public string Key { get; set; } = key;
 }

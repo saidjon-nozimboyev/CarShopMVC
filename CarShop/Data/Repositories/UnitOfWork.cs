@@ -11,11 +11,11 @@ public class UnitOfWork(AppDbContext dbContext)
 
     public ICategoryInterface Categories => new CategoryRepository(dbContext);
 
-    public IColorInterface Colors => throw new NotImplementedException();
+    public IColorInterface Colors => new ColorRepository(dbContext);
 
-    public IImageInterface Images => throw new NotImplementedException();
+    public IImageInterface Images => new ImageRepository(dbContext);
 
-    public IOrderInterface Orders => throw new NotImplementedException();
+    public IOrderInterface Orders => new OrderRepository(dbContext);
 
-    public IUserInterface Users => throw new NotImplementedException();
+    public IUserInterface Users => new UserRepository(dbContext);
 }
