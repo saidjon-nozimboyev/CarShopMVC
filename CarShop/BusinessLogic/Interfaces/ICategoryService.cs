@@ -2,7 +2,7 @@
 
 namespace CarShop.BusinessLogic.Interfaces;
 
-public interface ICategoryInterface
+public interface ICategoryService
 {
     List<CategoryDto> GetAll();
     CategoryDto GetById(int id);
