@@ -1,26 +1,21 @@
-using CarShop.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-
 namespace CarShop.Controllers
 {
+
     public class HomeController : Controller
     {
-        public class HomeController : Controller
+        public IActionResult Index()
         {
-            public IActionResult Index()
-            {
-                return View();
-            }
+            return View();
+        }
 
-            public IActionResult Error(string? url)
+        public IActionResult Error(string? url)
+        {
+            if (url == null)
             {
-                if (url == null)
-                {
-                    url = "/";
-                }
-                return View("Error404", url);
+                url = "/";
             }
+            return View("Error404", url);
         }
     }
+
 }
