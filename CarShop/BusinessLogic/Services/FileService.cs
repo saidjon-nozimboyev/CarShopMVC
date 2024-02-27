@@ -1,87 +1,84 @@
-﻿using CarShop.BusinessLogic.Interfaces;
+﻿namespace CarShop.BusinessLogic.Services;
 
-namespace CarShop.BusinessLogic.Services
+public class FileService(IWebHostEnvironment webHostEnvironment)
+    : IFileService
 {
-    public class FileService(IWebHostEnvironment webHostEnvironment)
-        : IFileService
+    private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
+
+    public void DeleteImage(string fileName)
     {
-        private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
+        var wwwrootFolder = _webHostEnvironment.WebRootPath;
+        var filePath = Path.Combine(wwwrootFolder, fileName.Replace("~/",""));
 
-        public void DeleteImage(string fileName)
+        if (File.Exists(filePath))
         {
-            var wwwrootFolder = _webHostEnvironment.WebRootPath;
-            var filePath = Path.Combine(wwwrootFolder, fileName.Replace("~/",""));
+            File.Delete(filePath);
+        }
+    }
 
-            if (File.Exists(filePath))
-            {
-                File.Delete(filePath);
-            }
+    public void DeleteMultiple(List<string> fileNames)
+    {
+        foreach (var fileName in fileNames)
+        {
+            DeleteImage(fileName);
+        }
+    }
+
+    public string UploadImage(IFormFile file)
+    {
+        var wwwrootFolder = _webHostEnvironment.WebRootPath;
+        var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+        var filePath = Path.Combine(wwwrootFolder + "/images/", uniqueFileName);
+
+        using (var fileStream = new FileStream(filePath, FileMode.Create))
+        {
+            file.CopyTo(fileStream);
         }
 
-        public void DeleteMultiple(List<string> fileNames)
-        {
-            foreach (var fileName in fileNames)
-            {
-                DeleteImage(fileName);
-            }
-        }
+        return $"~/images/{uniqueFileName}";
+    }
 
-        public string UploadImage(IFormFile file)
+    public List<string> UploadMultipleImageWithoutBg(List<IFormFile> files)
+    {
+        List<string> urls = new();
+        foreach (var file in files)
         {
             var wwwrootFolder = _webHostEnvironment.WebRootPath;
             var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
             var filePath = Path.Combine(wwwrootFolder + "/images/", uniqueFileName);
 
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            using (var client = new HttpClient())
+            using (var formData = new MultipartFormDataContent())
             {
-                file.CopyTo(fileStream);
-            }
+                formData.Headers.Add("X-Api-Key", "8nH9FGTUWEvkY22S2Gnn8JTp");
+                // read all bytes of IFormFile object
+                var fileBytes = new byte[file.Length];
+                file.OpenReadStream().Read(fileBytes, 0, fileBytes.Length);
+                // convert byte[] to Stream
+                Stream stream = new MemoryStream(fileBytes);
+                formData.Add(new StreamContent(stream), "image_file", "file.jpg");
+                formData.Add(new StringContent("auto"), "size");
+                var response = client.PostAsync("https://api.remove.bg/v1.0/removebg", formData).Result;
 
-            return $"~/images/{uniqueFileName}";
-        }
-
-        public List<string> UploadMultipleImageWithoutBg(List<IFormFile> files)
-        {
-            List<string> urls = new();
-            foreach (var file in files)
-            {
-                var wwwrootFolder = _webHostEnvironment.WebRootPath;
-                var uniqueFileName = Guid.NewGuid().ToString() + "_" + file.FileName;
-                var filePath = Path.Combine(wwwrootFolder + "/images/", uniqueFileName);
-
-                using (var client = new HttpClient())
-                using (var formData = new MultipartFormDataContent())
+                if (response.IsSuccessStatusCode)
                 {
-                    formData.Headers.Add("X-Api-Key", "8nH9FGTUWEvkY22S2Gnn8JTp");
-                    // read all bytes of IFormFile object
-                    var fileBytes = new byte[file.Length];
-                    file.OpenReadStream().Read(fileBytes, 0, fileBytes.Length);
-                    // convert byte[] to Stream
-                    Stream stream = new MemoryStream(fileBytes);
-                    formData.Add(new StreamContent(stream), "image_file", "file.jpg");
-                    formData.Add(new StringContent("auto"), "size");
-                    var response = client.PostAsync("https://api.remove.bg/v1.0/removebg", formData).Result;
-
-                    if (response.IsSuccessStatusCode)
+                    var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
+                    response.Content.CopyToAsync(fileStream).ContinueWith((copyTask) =>
                     {
-                        var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None);
-                        response.Content.CopyToAsync(fileStream).ContinueWith((copyTask) =>
-                        {
-                            file.CopyTo(fileStream);
-                            fileStream.Close();
-                        });
+                        file.CopyTo(fileStream);
+                        fileStream.Close();
+                    });
 
-                    }
-                    else
-                    {
-                        Console.WriteLine("Error: " + response.Content.ReadAsStringAsync().Result);
-                    }
                 }
-
-                urls.Add($"~/images/{uniqueFileName}");
+                else
+                {
+                    Console.WriteLine("Error: " + response.Content.ReadAsStringAsync().Result);
+                }
             }
 
-            return urls;
+            urls.Add($"~/images/{uniqueFileName}");
         }
+
+        return urls;
     }
 }

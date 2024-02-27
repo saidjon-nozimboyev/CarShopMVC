@@ -11,7 +11,7 @@ public class CarDto
     public string Description { get; set; } = null!;
     public double Price { get; set; }
     public CategoryDto Category { get; set; } = new();
-    public BrandDto Brend { get; set; } = new();
+    public BrandDto Brand { get; set; } = new();
 
     public List<ColorDto> Colors { get; set; } = new();
 }

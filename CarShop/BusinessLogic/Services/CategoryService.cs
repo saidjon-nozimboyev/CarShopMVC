@@ -1,8 +1,4 @@
-﻿using CarShop.BusinessLogic.DTOs.CategoryDTOs;
-using CarShop.BusinessLogic.Interfaces;
-using CarShop.Data.Interfaces;
-
-namespace CarShop.BusinessLogic.Services;
+﻿namespace CarShop.BusinessLogic.Services;
 
 public class CategoryService(IUnitOfWork unitOfWork,
                              IFileService fileService)

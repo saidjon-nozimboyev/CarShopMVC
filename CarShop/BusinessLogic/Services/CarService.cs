@@ -1,11 +1,4 @@
-﻿using CarShop.BusinessLogic.Common;
-using CarShop.BusinessLogic.DTOs.CarDTOs;
-using CarShop.BusinessLogic.Interfaces;
-using CarShop.Data.Entities;
-using CarShop.Data.Interfaces;
-using CarShop.Data.Repositories;
-
-namespace CarShop.BusinessLogic.Services;
+﻿namespace CarShop.BusinessLogic.Services;
 
 public class CarService(IUnitOfWork unitOfWork) 
     : ICarService

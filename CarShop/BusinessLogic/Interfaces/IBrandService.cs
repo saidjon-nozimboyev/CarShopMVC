@@ -1,6 +1,4 @@
-﻿using CarShop.BusinessLogic.DTOs.BrandDTOs;
-
-namespace CarShop.BusinessLogic.Interfaces;
+﻿namespace CarShop.BusinessLogic.Interfaces;
 
 public interface IBrandService
 {

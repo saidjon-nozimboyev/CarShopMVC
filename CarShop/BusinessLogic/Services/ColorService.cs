@@ -1,8 +1,4 @@
-﻿using CarShop.BusinessLogic.Common;
-using CarShop.BusinessLogic.DTOs.ColorDTOs;
-using CarShop.BusinessLogic.Interfaces;
-using CarShop.Data.Entities;
-using CarShop.Data.Interfaces;
+﻿using CarShop.BusinessLogic.DTOs.ColorDTOs;
 
 
 namespace CarShop.BusinessLogic.Services

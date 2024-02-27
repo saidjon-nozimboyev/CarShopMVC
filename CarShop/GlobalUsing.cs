@@ -1,2 +1,12 @@
-﻿global using Microsoft.EntityFrameworkCore;
+﻿global using CarShop.Data.Entities;
+global using CarShop.Data.Interfaces;
+global using Microsoft.EntityFrameworkCore;
+global using CarShop.Data;
+global using CarShop.Data.Repositories;
+global using CarShop.BusinessLogic.DTOs.CategoryDTOs;
+global using CarShop.BusinessLogic.DTOs.BrandDTOs;
+global using CarShop.BusinessLogic.DTOs.CarDTOs;
+global using CarShop.BusinessLogic.Common;
+global using CarShop.BusinessLogic.Interfaces;
+global using CarShop.BusinessLogic.Services;
 global using Microsoft.AspNetCore.Mvc;

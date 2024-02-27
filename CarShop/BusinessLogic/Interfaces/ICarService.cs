@@ -1,6 +1,4 @@
-﻿using CarShop.BusinessLogic.DTOs.CarDTOs;
-
-namespace CarShop.BusinessLogic.Interfaces;
+﻿namespace CarShop.BusinessLogic.Interfaces;
 
 public interface ICarService
 {

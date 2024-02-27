@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using CarShop.BusinessLogic.Common;
-using CarShop.BusinessLogic.DTOs.BrandDTOs;
-using CarShop.BusinessLogic.Interfaces;
-using CarShop.Data.Entities;
-using CarShop.Data.Interfaces;
 
 namespace CarShop.BusinessLogic.Services;
 
