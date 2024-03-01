@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using CarShop.Areas.Admin.Data.Entities;
+using CarShop.Areas.Admin.Data.Interfaces;
 
 namespace CarShop.BusinessLogic.Services;
 

@@ -1,4 +1,7 @@
-﻿namespace CarShop.BusinessLogic.Services;
+﻿using CarShop.Areas.Admin.Data.Entities;
+using CarShop.Areas.Admin.Data.Interfaces;
+
+namespace CarShop.BusinessLogic.Services;
 
 public class CarService(IUnitOfWork unitOfWork) 
     : ICarService
@@ -22,7 +25,7 @@ public class CarService(IUnitOfWork unitOfWork)
             Description = carDto.Description,
             Price = carDto.Price,
             CategoryId = carDto.CategoryId,
-            BrandId = carDto.BrendId,
+            BrandId = carDto.BrandId,
             Brand = null,
             Category = null
         };
@@ -68,7 +71,7 @@ public class CarService(IUnitOfWork unitOfWork)
         car.Description = carDto.Description;
         car.Price = carDto.Price;
         car.CategoryId = carDto.CategoryId;
-        car.BrandId = carDto.BrendId;
+        car.BrandId = carDto.BrandId;
 
         _unitOfWork.Cars.Update(car);
     }

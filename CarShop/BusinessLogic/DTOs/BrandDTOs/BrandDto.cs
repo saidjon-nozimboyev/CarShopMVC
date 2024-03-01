@@ -1,5 +1,5 @@
-﻿using CarShop.BusinessLogic.DTOs.CategoryDTOs;
-using CarShop.Data.Entities;
+﻿using CarShop.Areas.Admin.Data.Entities;
+using CarShop.BusinessLogic.DTOs.CategoryDTOs;
 
 namespace CarShop.BusinessLogic.DTOs.BrandDTOs
 {

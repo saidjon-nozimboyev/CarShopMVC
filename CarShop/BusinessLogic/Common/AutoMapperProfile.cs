@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using CarShop.Areas.Admin.Data.Entities;
 using CarShop.BusinessLogic.DTOs.BrandDTOs;
-using CarShop.Data.Entities;
 
 namespace CarShop.BusinessLogic.Common
 {

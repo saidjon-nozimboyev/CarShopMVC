@@ -1,4 +1,6 @@
-﻿namespace CarShop.BusinessLogic.Services;
+﻿using CarShop.Areas.Admin.Data.Interfaces;
+
+namespace CarShop.BusinessLogic.Services;
 
 public class CategoryService(IUnitOfWork unitOfWork,
                              IFileService fileService)

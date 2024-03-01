@@ -1,4 +1,4 @@
-﻿using CarShop.Data.Entities;
+﻿using CarShop.Areas.Admin.Data.Entities;
 
 namespace CarShop.BusinessLogic.DTOs.CategoryDTOs;
 
